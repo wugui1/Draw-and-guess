@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import fzu.zrf.dng.both.io.LoginInfo;
 import fzu.zrf.dng.client.Args;
-import fzu.zrf.dng.client.Args.Key;
 import fzu.zrf.dng.client.ClientMain;
 import fzu.zrf.dng.client.i18n.I18N;
 import fzu.zrf.dng.client.io.ObjectSocket;
@@ -53,8 +52,7 @@ public class Login extends Scene {
                 if (rsl.success) {
                     ClientMain.setScene(Lobby.INSTANCE);
                 }
-                Args.setValue(Key.USER_TYPE, rsl.type);
-                Args.setValue(Key.AUTH, rsl.auth);
+                Args.setAuth(rsl.auth);
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

@@ -5,5 +5,4 @@ public class Conf {
     }
 
     public static final int PORT = 11451;
-    public static final String ADDRESS = "localhost";// "blog.tozzger.info";
 }

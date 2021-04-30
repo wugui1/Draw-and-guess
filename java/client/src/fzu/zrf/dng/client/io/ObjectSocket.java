@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Properties;
 
 import fzu.zrf.dng.both.data.Conf;
 
@@ -13,8 +14,19 @@ public class ObjectSocket implements Closeable {
     private ObjectInputStream ois;
     private ObjectOutputStream oos;
 
+    private static final String ADDRESS;
+    static {
+        Properties p = new Properties();
+        try {
+            p.load(ObjectSocket.class.getClassLoader().getResourceAsStream("config.properties"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ADDRESS = p.getProperty("address");
+    }
+
     public ObjectSocket() throws IOException {
-        soc = new Socket(Conf.ADDRESS, Conf.PORT);
+        soc = new Socket(ADDRESS, Conf.PORT);
         oos = new ObjectOutputStream(soc.getOutputStream());
         ois = new ObjectInputStream(soc.getInputStream());
     }
